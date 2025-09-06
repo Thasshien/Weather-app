@@ -6,7 +6,7 @@ import AlertsPanel from '../components/alertsPanel/alertsPanel';
 import WeatherMap from '../components/weatherMap/weatherMap';
 import Navbar from '../components/navbar/navbar';
 import { getWeatherData, getWeatherByCoords } from '../services/weatherService';
-import './Dashboard.css';
+import './dashboard.css';
 
 const Dashboard = () => {
   const [weatherData, setWeatherData] = useState(null);
