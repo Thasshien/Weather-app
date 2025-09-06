@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://weather-app-67o9.onrender.com/"
+const url = "https://weather-app-67o9.onrender.com"
 
 const getWeatherData = async (city) => {
   try {
