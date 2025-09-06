@@ -16,17 +16,15 @@
   max-width: 100%;
   margin: 0;
   padding: 0;
-  min-height: calc(100vh - 80px); /* Subtract header height */
+  min-height: calc(100vh - 80px);   
 }
 
-/* Full width header */
 .header {
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
-/* Content with proper spacing */
 .dashboard-content {
   padding: 1rem;
   max-width: 1200px;
@@ -241,7 +239,6 @@
   }
 }
 
-/* Ensure no horizontal overflow */
 .dashboard * {
   max-width: 100%;
 }

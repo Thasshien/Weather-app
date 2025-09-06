@@ -21,22 +21,40 @@ const generateAlerts = (forecast) => {
   return uniqueAlerts;
 };
 
-const formatCurrentWeather = (data) => ({
-  temperature: data.main.temp,
-  feels_like: data.main.feels_like,
-  description: data.weather[0].description,
-  icon: data.weather[0].icon,
-  humidity: data.main.humidity,
-  wind_speed: data.wind.speed,
-  wind_direction: data.wind.deg,
-  pressure: data.main.pressure,
-  visibility: (data.visibility / 1000).toFixed(1), // km
-  sunrise: new Date(data.sys.sunrise * 1000).toLocaleTimeString(),
-  sunset: new Date(data.sys.sunset * 1000).toLocaleTimeString(),
-});
+const formatCurrentWeather = (data) => {
+  const tzOffset = data.timezone; // seconds offset from UTC
+  const getLocalTime = (unixTime) => {
+    const date = new Date((unixTime + tzOffset) * 1000);
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  };
+
+  return {
+    temperature: data.main.temp,
+    feels_like: data.main.feels_like,
+    description: data.weather[0].description,
+    icon: data.weather[0].icon,
+    humidity: data.main.humidity,
+    wind_speed: data.wind.speed,
+    wind_direction: data.wind.deg,
+    pressure: data.main.pressure,
+    visibility: (data.visibility / 1000).toFixed(1), // km
+    sunrise: getLocalTime(data.sys.sunrise),
+    sunset: getLocalTime(data.sys.sunset),
+  };
+};
+
 
 const formatForecast = (list) => {
-  return list.slice(0, 5).map(item => ({
+  const dailyMap = {};
+
+  list.forEach(item => {
+    const date = new Date(item.dt_txt).toDateString();
+    if (!dailyMap[date]) {
+      dailyMap[date] = item;
+    }
+  });
+
+  return Object.values(dailyMap).slice(0, 5).map(item => ({
     date: item.dt_txt,
     day: new Date(item.dt_txt).toLocaleDateString("en-US", { weekday: "short" }),
     temp_max: item.main.temp_max,
@@ -45,6 +63,7 @@ const formatForecast = (list) => {
     icon: item.weather[0].icon,
   }));
 };
+
 
 const getWeatherByCity = async (req, res) => {
   try {

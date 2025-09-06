@@ -16,19 +16,15 @@ const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Load search history from localStorage
     const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
     setSearchHistory(history);
 
-    // Load theme preference
     const savedTheme = localStorage.getItem('darkMode') === 'true';
     setDarkMode(savedTheme);
 
-    // Load default city or last searched city
     if (history.length > 0) {
       handleSearch(history[0]);
     } else {
-      // Try to get user's location
       getUserLocation();
     }
   }, []);
@@ -64,7 +60,6 @@ const Dashboard = () => {
       const data = await getWeatherData(city);
       setWeatherData(data);
       
-      // Update search history
       const newHistory = [city, ...searchHistory.filter(item => item !== city)].slice(0, 5);
       setSearchHistory(newHistory);
       localStorage.setItem('searchHistory', JSON.stringify(newHistory));
