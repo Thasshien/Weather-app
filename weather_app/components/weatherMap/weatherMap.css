@@ -95,7 +95,6 @@
   }
 }
 
-/* Map popup styles */
 .map-popup h4 {
   margin: 0 0 0.5rem 0;
   color: #1f2937;
@@ -109,7 +108,6 @@
   line-height: 1.4;
 }
 
-/* Leaflet popup overrides */
 .leaflet-popup-content-wrapper {
   border-radius: 12px !important;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;

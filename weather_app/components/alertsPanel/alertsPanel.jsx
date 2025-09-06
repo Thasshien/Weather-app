@@ -1,5 +1,5 @@
 import React from 'react';
-import './AlertsPanel.css';
+import './alertsPanel.css';
 
 const AlertsPanel = ({ alerts }) => {
   if (!alerts || alerts.length === 0) {

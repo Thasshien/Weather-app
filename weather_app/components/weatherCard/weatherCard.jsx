@@ -1,5 +1,5 @@
 import React from 'react';
-import './WeatherCard.css';
+import './weatherCard.css';
 
 const WeatherCard = ({ weather, city }) => {
   const getWeatherIcon = (iconCode) => {
